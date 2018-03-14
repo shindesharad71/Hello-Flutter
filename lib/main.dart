@@ -1,3 +1,5 @@
+import 'dart:_http';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -7,11 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Network Requests',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Toolbar Title'),
+      home: new MyHomePage(title: 'Flutter Newtwork Request'),
     );
   }
 }
@@ -26,12 +28,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  var _counter;
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      final url = 'https://jsonplaceholder.typicode.com/posts';
+      HttpRequest.request(url)
+      .then((value) {
+          _counter =  JSON.decode(value.responseText)['origin'];
+      })
+      .catchError((error) => print(error));
     });
+
   }
 
   @override
