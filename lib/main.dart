@@ -34,7 +34,6 @@ class HomePageState extends State<HomePage> {
   void initState() {
     this.getData();
   }
-}
 
 @override
 Widget build(BuildContext context) {
@@ -42,5 +41,20 @@ Widget build(BuildContext context) {
     appBar: new AppBar(
       title: new Text("Listviews"),
     ),
-  )
+    body: new ListView.builder(
+      itemCount: data.length,
+      itemBuilder: (BuildContext context, int index) {
+        Text temp;
+        if(data[index] != null) {
+          temp = new Text(data["title"])
+        } else {
+          temp = new Text("null");
+        }
+        return new Card(
+          child: temp,
+        );
+      },
+    ),
+  );
+}
 }
