@@ -34,20 +34,19 @@ class HomePageState extends State<HomePage> {
     this.getData();
   }
 
+  
 @override
 Widget build(BuildContext context) {
   return new Scaffold(
     appBar: new AppBar(
       title: new Text("Listviews"),
     ),
-    body: new Container(
-      new Text("Test App"),
-     new ListView.builder(
+    body: new ListView.builder(
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
         Text temp;
         if(data[index] != null) {
-          temp = new Text(data["title"])
+          temp = new Text(data["title"]);
         } else {
           temp = new Text("null");
         }
@@ -56,7 +55,6 @@ Widget build(BuildContext context) {
         );
       },
     ),
-  )
   );
 }
 
