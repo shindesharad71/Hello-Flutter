@@ -26,7 +26,6 @@ class HomePageState extends State<HomePage> {
     data = JSON.decode(response.body);
   });
 
-  print(data);
   return "Success!";
   }
 
@@ -57,4 +56,5 @@ Widget build(BuildContext context) {
     ),
   );
 }
+
 }
