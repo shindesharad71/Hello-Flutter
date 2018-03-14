@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -12,26 +13,27 @@ void main() {
 class HomePage extends StatefulWidget {
   @override
   HomePageState createState() => new HomePageState();
+
 }
 
 class HomePageState extends State<HomePage> {
   Map data;
 
- Future<String> getData() async {
-   var response = await http.get(
-       Uri.encodeFull("https://jsonplaceholder.typicode.com/posts"),
-       headers: {
-         "Accept": "application/json"
-       }
-   );
+  Future<String> getData() async {
+    var response = await http.get(
+        Uri.encodeFull(
+            "https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=boolean"),
+        headers: {
+          "Accept": "application/json"
+        }
+    );
 
-   this.setState(() {
-     data = JSON.decode(response.body);
-   });
-   print(data[1]["title"]);
+    this.setState(() {
+      data = JSON.decode(response.body);
+    });
 
-   return "Success!";
- }
+    return "Success!";
+  }
 
   @override
   void initState() {
@@ -42,14 +44,16 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Listviews"),
+        title: new Text("Flutter JSON Parsing"),
       ),
-      body: new ListView.builder(
-        itemCount: data.length,
+      body: new Container(
+        child: new Center(
+        child: new ListView.builder(
+        itemCount: data["results"].length,
         itemBuilder: (BuildContext context, int index) {
           Text temp;
-          if(data[index]["title"] != null) {
-            temp = new Text(data[index]["title"]);
+          if(data["results"][index]["question"] != null) {
+            temp = new Text(data["results"][index]["question"], style: new TextStyle(fontSize: 20.0));
           }else{
             temp = new Text("null");
           }
@@ -58,6 +62,8 @@ class HomePageState extends State<HomePage> {
           );
         },
       ),
+    )
+    )
     );
   }
 }
