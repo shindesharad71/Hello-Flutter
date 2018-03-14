@@ -47,7 +47,7 @@ class HomePageState extends State<HomePage> {
         title: new Text("Flutter JSON Parsing"),
       ),
       body: new Container(
-        child: new Center(
+        padding: new EdgeInsets.all(5.0),
         child: new ListView.builder(
         itemCount: data["results"].length,
         itemBuilder: (BuildContext context, int index) {
@@ -62,7 +62,6 @@ class HomePageState extends State<HomePage> {
           );
         },
       ),
-    )
     )
     );
   }
